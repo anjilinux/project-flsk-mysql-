@@ -3,3 +3,4 @@ Flask-MySQLdb
 WTForms
 passlib
 Flask-Script
+mysql-connector
