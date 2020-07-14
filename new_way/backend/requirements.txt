@@ -1,0 +1,6 @@
+Flask==1.1.1
+mysql-connector==2.2.9
+Flask-MySQLdb
+WTForms
+passlib
+Flask-Script
