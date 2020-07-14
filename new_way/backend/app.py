@@ -25,7 +25,8 @@ mysql = mysql.connector.connect(
             password=pf.read(),
             host=host, # name of the mysql service as set in the docker-compose file
             database=database,
-            auth_plugin='mysql_native_password' )
+            auth_plugin='mysql_native_password',
+			port=33060 )
 
 
 
