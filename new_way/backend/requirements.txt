@@ -1,4 +1,5 @@
 Flask==1.1.1
+setuptools
 mysql-connector==2.2.9
 Flask-MySQLdb
 WTForms
