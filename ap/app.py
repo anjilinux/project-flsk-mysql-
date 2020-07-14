@@ -6,16 +6,28 @@ from passlib.hash import sha256_crypt
 from flask_script import Manager
 from functools import wraps
 from datetime import datetime
+import mysql.connector
+
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'password'
-app.config['MYSQL_DB'] = 'Gym'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+# app.config['MYSQL_HOST'] = 'localhost'
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = 'password'
+# app.config['MYSQL_DB'] = 'Gym'
+# app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.secret_key = '528491@JOKER'
-mysql = MySQL(app)
+
+config = {
+        'user': 'root',
+        'password': 'root',
+        'host': 'db',
+        'port': '3306',
+        'database': 'Gym'
+    }
+
+
+mysql = mysql.connector.connect(**config)
 
 def is_logged_in(f):
 	@wraps(f)
