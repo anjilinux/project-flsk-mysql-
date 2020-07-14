@@ -702,9 +702,9 @@ def logout():
 
 if __name__ == "__main__":
 	
-	app.debug = True
+	# app.debug = True
 	# manager = Manager(app)
 	#manager.secret_key = '528491@siva'
 	# manager.run()
 	# app.run()
-	app.run(host="0.0.0.0") #for aws
+	app.run(host='0.0.0.0') #for aws
