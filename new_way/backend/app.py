@@ -20,22 +20,22 @@ pf = open(password_file, 'r')
 
 
 
-mysql = mysql.connector.connect(
-            user=user, 
-            password=pf.read(),
-            host=host, # name of the mysql service as set in the docker-compose file
-            database=database,
-            auth_plugin='mysql_native_password' )
+# mysql = mysql.connector.connect(
+#             user=user, 
+#             password=pf.read(),
+#             host=host, # name of the mysql service as set in the docker-compose file
+#             database=database,
+#             auth_plugin='mysql_native_password' )
 
-pf.close()
 
-# app.config['MYSQL_HOST'] = 'localhost'
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = 'password'
-# app.config['MYSQL_DB'] = 'Gym'
-# app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+
+app.config['MYSQL_HOST'] = host
+app.config['MYSQL_USER'] = user
+app.config['MYSQL_PASSWORD'] = pf.read()
+app.config['MYSQL_DB'] = 'Gym'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.secret_key = '528491@JOKER'
-
+pf.close()
 # config = {
 #         'user': 'root',
 #         'password': 'root',
@@ -46,6 +46,7 @@ app.secret_key = '528491@JOKER'
 
 
 # mysql = mysql.connector.connect(**config)
+mysql = MySQL(app)
 
 def is_logged_in(f):
 	@wraps(f)
