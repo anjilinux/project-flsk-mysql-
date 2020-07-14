@@ -31,7 +31,7 @@ pf = open(password_file, 'r')
 
 app.config['MYSQL_HOST'] = host
 app.config['MYSQL_USER'] = user
-app.config['MYSQL_PASSWORD'] = pf.read()
+app.config['MYSQL_PASSWORD'] = "db-78n9n"
 app.config['MYSQL_DB'] = 'Gym'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.secret_key = '528491@JOKER'
