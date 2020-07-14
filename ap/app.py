@@ -695,4 +695,4 @@ if __name__ == "__main__":
 	#manager.secret_key = '528491@siva'
 	# manager.run()
 	# app.run()
-	app.run(host="0.0.0.0", port=80) #for aws
+	app.run(host="0.0.0.0") #for aws
