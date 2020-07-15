@@ -97,7 +97,7 @@ def login():
 
 		result = cur.execute('SELECT * FROM info WHERE username = %s', [username])
 		#print(result)
-		if result>0:
+		if result:
 			data = cur.fetchone()
 			password = data['password']
 
