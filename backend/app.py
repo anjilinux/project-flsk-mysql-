@@ -38,7 +38,7 @@ class DBManager:
         self.cursor.executemany('INSERT INTO blog (id, title) VALUES (%s, %s);', [(i, 'Blog post #%d'% i) for i in range (1,5)])
         self.connection.commit()
 
-conn = DBManager()
+con = DBManager()
 
 
 
