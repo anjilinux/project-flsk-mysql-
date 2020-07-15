@@ -37,8 +37,8 @@ app = Flask(__name__)
 #         self.cursor.execute('CREATE TABLE blog (id INT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255))')
 #         self.cursor.executemany('INSERT INTO blog (id, title) VALUES (%s, %s);', [(i, 'Blog post #%d'% i) for i in range (1,5)])
 #         self.connection.commit()
-
-con = DBManager()
+# 
+# con = DBManager()
 
 
 connection = mysql.connector.connect(
