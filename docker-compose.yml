@@ -4,21 +4,18 @@ services:
     image: mysql:8.0.19
     command: '--default-authentication-plugin=mysql_native_password'
     restart: always
-    secrets:
-      - db-password
     volumes:
       - db-data:/var/lib/mysql
-      # - ./db:/docker-entrypoint-initdb.d/:ro
+      - ./db:/docker-entrypoint-initdb.d/:ro
     networks:
       - backnet
     environment:
       - MYSQL_DATABASE=example
-      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
+      - MYSQL_ROOT_PASSWORD=password
   backend:
     build: backend
     restart: always
-    secrets:
-      - db-password
+    
     ports:
       - 5000:5000
     networks:
@@ -33,9 +30,7 @@ services:
       - frontnet
 volumes:
   db-data:
-secrets:
-  db-password:
-    file: db/password.txt
+
 networks:
   backnet:
   frontnet:
