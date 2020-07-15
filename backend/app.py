@@ -6,6 +6,7 @@ from passlib.hash import sha256_crypt
 from flask_script import Manager
 from functools import wraps
 from datetime import datetime
+import mysql.connector
 
 app = Flask(__name__)
 
