@@ -1,4 +1,4 @@
-FROM python:3.8-alpine
+FROM python
 WORKDIR /code
 COPY requirements.txt /code/
 RUN apt install -y libmysqlclient-dev
