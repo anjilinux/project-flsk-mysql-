@@ -1,6 +1,7 @@
 FROM python:3.8-alpine
 WORKDIR /code
 COPY requirements.txt /code/
+RUN apt install -y libmysqlclient-dev
 RUN pip install -r requirements.txt
 COPY . /code/
 ENV FLASK_APP app.py
