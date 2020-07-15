@@ -105,7 +105,9 @@ def login():
 		cur = connection.cursor()
 
 		result = cur.execute('SELECT * FROM info WHERE username = %s', [username])
-		#print(result)
+		print("-"*100)
+		print(result)
+		print("-"*100)
 		if result:
 			data = cur.fetchone()
 			password = data['password']
