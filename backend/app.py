@@ -102,7 +102,7 @@ def login():
 		username = request.form['username']
 		password_candidate = request.form['password']
 
-		cur = connection.cursor
+		cur = connection.cursor()
 
 		result = cur.execute('SELECT * FROM info WHERE username = %s', [username])
 		#print(result)
@@ -151,7 +151,7 @@ def update_password(username):
 	if request.method == 'POST' and form.validate():
 		new = form.new_password.data
 		entered = form.old_password.data
-		cur = connection.cursor
+		cur = connection.cursor()
 		cur.execute("SELECT password FROM info WHERE username = %s", [username])
 		old = (cur.fetchone())['password']
 		if sha256_crypt.verify(entered, old):
@@ -192,7 +192,7 @@ class AddTrainorForm(Form):
 @is_admin
 def addTrainor():
 	values.clear()
-	cur = connection.cursor
+	cur = connection.cursor()
 	q = cur.execute("SELECT username FROM info")
 	b = cur.fetchall()
 	for i in range(q):
@@ -212,7 +212,7 @@ def addTrainor():
 		prof = 2
 		phone = form.phone.data
 
-		cur = connection.cursor
+		cur = connection.cursor()
 
 		cur.execute("INSERT INTO info(name, username, password, street, city, prof, phone) VALUES(%s, %s, %s, %s, %s, %s, %s)", (name, username, password, street, city, 3,phone))
 		cur.execute("INSERT INTO trainors(username) VALUES(%s)", [username])
@@ -234,7 +234,7 @@ class DeleteRecepForm(Form):
 @is_admin
 def deleteTrainor():
 	choices.clear()
-	cur = connection.cursor
+	cur = connection.cursor()
 	q = cur.execute("SELECT username FROM trainors")
 	b = cur.fetchall()
 	for i in range(q):
@@ -266,7 +266,7 @@ def deleteTrainor():
 @is_admin
 def addRecep():
 	values.clear()
-	cur = connection.cursor
+	cur = connection.cursor()
 	q = cur.execute("SELECT username FROM info")
 	b = cur.fetchall()
 	for i in range(q):
@@ -285,7 +285,7 @@ def addRecep():
 		city = form.city.data
 		phone = form.phone.data
 
-		cur = connection.cursor
+		cur = connection.cursor()
 
 		cur.execute("INSERT INTO info(name, username, password, street, city, prof, phone) VALUES(%s, %s, %s, %s, %s, %s, %s)", (name, username, password, street, city, 2,phone))
 		cur.execute("INSERT INTO receps(username) VALUES(%s)", [username])
@@ -305,7 +305,7 @@ class DeleteRecepForm(Form):
 @is_admin
 def deleteRecep():
 	choices.clear()
-	cur = connection.cursor
+	cur = connection.cursor()
 	q = cur.execute("SELECT username FROM receps")
 	b = cur.fetchall()
 	for i in range(q):
@@ -341,7 +341,7 @@ def addEquip():
 	if request.method == 'POST' and form.validate():
 		name = form.name.data
 		count = form.count.data
-		cur = connection.cursor
+		cur = connection.cursor()
 		q = cur.execute("SELECT name FROM equip")
 		equips = []
 		b = cur.fetchall()
@@ -367,7 +367,7 @@ class RemoveEquipForm(Form):
 @is_admin
 def removeEquip():
 	choices.clear()
-	cur = connection.cursor
+	cur = connection.cursor()
 	q = cur.execute("SELECT name FROM equip")
 	b = cur.fetchall()
 	for i in range(q):
@@ -383,7 +383,7 @@ def removeEquip():
 		if num >= form.count.data and form.count.data>0:
 			name = form.name.data
 			count = form.count.data
-			cur = connection.cursor
+			cur = connection.cursor()
 			cur.execute("UPDATE equip SET count = count-%s WHERE name = %s", (count, name))
 			connection.commit()
 			cur.close()
@@ -417,7 +417,7 @@ class AddMemberForm(Form):
 def addMember():
 	choices.clear()
 	choices2.clear()
-	cur = connection.cursor
+	cur = connection.cursor()
 
 	q = cur.execute("SELECT username FROM info")
 	b = cur.fetchall()
@@ -449,7 +449,7 @@ def addMember():
 		phone = form.phone.data
 		plan = form.plan.data
 		trainor = form.trainor.data
-		cur = connection.cursor
+		cur = connection.cursor()
 
 		cur.execute("INSERT INTO info(name, username, password, street, city, prof, phone) VALUES(%s, %s, %s, %s, %s, %s, %s)", (name, username, password, street, city, 4,phone))
 		cur.execute("INSERT INTO members(username, plan, trainor) VALUES(%s, %s, %s)", (username, plan, trainor))
@@ -469,7 +469,7 @@ def addMember():
 @is_recep_level
 def deleteMember():
 	choices.clear()
-	cur = connection.cursor
+	cur = connection.cursor()
 	q = cur.execute("SELECT username FROM members")
 	b = cur.fetchall()
 	for i in range(q):
@@ -478,7 +478,7 @@ def deleteMember():
 	form = DeleteRecepForm(request.form)
 	if request.method == 'POST':
 		username = form.username.data
-		cur = connection.cursor
+		cur = connection.cursor()
 		cur.execute("DELETE FROM members WHERE username = %s", [username])
 		cur.execute("DELETE FROM info WHERE username = %s", [username])
 		connection.commit()
@@ -492,7 +492,7 @@ def deleteMember():
 
 @app.route('/viewDetails')
 def viewDetails():
-	cur = connection.cursor
+	cur = connection.cursor()
 	cur.execute("SELECT username FROM info WHERE username != %s", [session['username']])
 	result = cur.fetchall()
 	return render_template('viewDetails.html', result = result)
@@ -515,14 +515,14 @@ class trainorForm(Form):
 @is_trainor
 def trainorDash():
 	choices.clear()
-	cur = connection.cursor
+	cur = connection.cursor()
 	cur.execute("SELECT name, count FROM equip")
 	equips = cur.fetchall()
 	#app.logger.info(equips)
 	cur.execute("SELECT username FROM members WHERE trainor = %s", [session['username']])
 	members_under = cur.fetchall()
 	cur.close()
-	cur = connection.cursor
+	cur = connection.cursor()
 
 	q = cur.execute("SELECT username FROM members WHERE trainor = %s", [session['username']])
 	b = cur.fetchall()
@@ -552,7 +552,7 @@ def trainorDash():
 			return redirect(url_for('trainorDash'))
 
 
-		cur = connection.cursor
+		cur = connection.cursor()
 		p = cur.execute("SELECT date FROM progress WHERE username = %s", [username])
 		entered = []
 		q = cur.fetchall()
@@ -595,7 +595,7 @@ def updatePlans():
 		exercise = form.exercise.data
 		reps = form.reps.data
 		sets = form.sets.data
-		cur = connection.cursor
+		cur = connection.cursor()
 		cur.execute("SELECT name, exercise FROM plans WHERE name = %s and exercise = %s", (name, exercise))
 		result = cur.fetchall()
 		if len(result)>0:
@@ -616,7 +616,7 @@ def memberDash(username):
 	if session['prof']==4 and username!=session['username']:
 		flash('You aren\'t authorised to view other\'s Dashboards', 'danger')
 		return redirect(url_for('memberDash', username = session['username']))
-	cur = connection.cursor
+	cur = connection.cursor()
 	cur.execute("SELECT plan FROM members WHERE username = %s", [username])
 	plan = (cur.fetchone())['plan']
 	cur.execute("SELECT exercise, reps, sets FROM plans WHERE name = %s", [plan])
@@ -642,7 +642,7 @@ def memberDash(username):
 @is_logged_in
 def profile(username):
 	if username == session['username'] or session['prof']==1 or session['prof']==2:
-		cur = connection.cursor
+		cur = connection.cursor()
 		cur.execute("SELECT * FROM info WHERE username = %s", [username])
 		result = cur.fetchone()
 		return render_template('profile.html', result = result)
@@ -674,7 +674,7 @@ def edit_profile(username):
 		if session['prof']==3:
 			return redirect(url_for('trainorDash', username = username))
 
-	cur = connection.cursor
+	cur = connection.cursor()
 	cur.execute("SELECT * FROM info WHERE username = %s", [username]);
 	result = cur.fetchone()
 
@@ -696,7 +696,7 @@ def edit_profile(username):
 		app.logger.info(name)
 		app.logger.info(street)
 		app.logger.info(city)
-		cur = connection.cursor
+		cur = connection.cursor()
 
 		q = cur.execute("UPDATE info SET name = %s, street = %s, city = %s, phone = %s WHERE username = %s", (name, street, city, phone, username))
 		app.logger.info(q)
