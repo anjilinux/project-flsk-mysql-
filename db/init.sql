@@ -1,7 +1,6 @@
 
 
-CREATE DATABASE Gym;
-use Gym;
+
 
 
 DROP TABLE IF EXISTS equip;

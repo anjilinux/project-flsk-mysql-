@@ -1,7 +1,5 @@
 Flask==1.1.1
-setuptools
-mysql-connector
-Flask-MySQLdb
+mysql-connector==2.2.9
 WTForms
 passlib
 Flask-Script
