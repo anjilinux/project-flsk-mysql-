@@ -11,7 +11,7 @@ import mysql.connector
 
 app = Flask(__name__)
 
-database='Gym'
+database='example'
 host="db"
 user="root",
 password_file='/run/secrets/db-password'
