@@ -3,3 +3,4 @@ mysql-connector==2.2.9
 WTForms
 passlib
 Flask-Script
+Flask-MySQLdb
