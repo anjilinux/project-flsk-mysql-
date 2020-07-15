@@ -25,7 +25,9 @@ connection = mysql.connector.connect(
             password=pf.read(),
             host=host, # name of the mysql service as set in the docker-compose file
             database=database,
-            auth_plugin='mysql_native_password' )
+            auth_plugin='mysql_native_password'
+			
+			 )
 
 
 
@@ -34,7 +36,7 @@ connection = mysql.connector.connect(
 # app.config['MYSQL_PASSWORD'] = "db-78n9n"
 # app.config['MYSQL_DB'] = 'Gym'
 # app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.secret_key = '528491@JOKER'
+# app.secret_key = '528491@JOKER'
 pf.close()
 # config = {
 #         'user': 'root',
