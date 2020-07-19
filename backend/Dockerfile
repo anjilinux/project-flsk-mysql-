@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:bionic
 WORKDIR /code
 RUN apt update
 COPY requirements.txt /code/
